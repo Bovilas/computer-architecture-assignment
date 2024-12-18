@@ -24,8 +24,21 @@ source: https://www.cpu-world.com/CPUs/29000/AMD-Am29000-20KC.html
 akumuliatoriniai, registriniai, stekiniai (dėklo architektūros),
 atmintis-į-atmintį architektūros arba kokios nors kitos architektūros?
 
+The 29k evolved from the same Berkeley RISC design
+source: https://en.wikipedia.org/wiki/AMD_Am29000
+
 4. Ar tai buvo beadresinės (stekinės), vieno adreso, dviejų adresų,
 trijų adresų ar keturios adresų mašinos?
+
+The AMD AM29000 (often referred to as the AM29K) was primarily a zero-address machine, often referred to as a "stack machine."
+
+This architecture is designed around the concept of using a register stack for operations rather than explicitly specifying operands in the instruction set. 
+Instructions for the AM29000 typically operate on the top of the stack, implicitly taking their arguments from there and pushing results back onto it.
+
+This design simplifies instruction encoding and allows for efficient use of registers, which was a hallmark of the AM29K's architecture.
+
+source: ChatGPT, prompt: was the amd am29000 a zero-address, one-address, two-address, three-address or four address machine?
+https://chatgpt.com/share/67635580-70d0-800b-8160-93108d0d86f1
 
 5. Kokie buvo registrai abiejose architektūrose? Ar šios architektūros
 iš viso turėjo registrus? Ar tai buvo bendrosios paskirties registrai,
@@ -33,10 +46,23 @@ ar specializuoti registrai? Kiek registrų turėjo kiekviena
 architektūra?  Kokie buvo šių registrų duomenų pločiai? Kokia buvo
 specifinė registrų paskirtis?
 
+It was here that the 29000 differed from earlier designs, using a variable window size. 
+It also added more registers, including the same 128 registers for the procedure stack, but adding another 64 for global access.
+The 29000 also extended the register window stack with an in-memory (and in theory, in-cache) stack. 
+When the window filled the calls would be pushed off the end of the register stack into memory, restored as required when the routine returned. 
+Generally, the 29000's register usage was considerably more advanced than competing designs based on the Berkeley concepts.
+
+source: wiki
+
 6. Ar požymių bitai buvo naudojami šiose architektūrose? Kokie
 požymiai buvo naudojami?
 
+The AMD Am29000 did not implement flags
+
 7. Koks buvo kiekvienos architektūros duomenų plotis (mašininis žodis)?
+
+The AMD Am29000 was a 32-bit architecture, with a machine word size of 32 bits.
+wiki
 
 8. Koks buvo kiekvienos sistemos atminties išdėstymas? Ar adresų buvo
 erdvė ištisinė, ar ji buvo suskirstytas į segmentus, puslapius,
