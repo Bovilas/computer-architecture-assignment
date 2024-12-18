@@ -7,6 +7,19 @@ integracijos masto (LSI), labai didelio integracijos masto (VLSI), ar
 tai buvo monokristaliniai šiuolaikiniai mikroprocesoriai)? Kokios buvo
 fizinės įrangos savybės (svoris, dydis, energijos suvartojimas)?
 
+The AMD Am29000, released in may 1988 contained 428,000 transistors on a 1-micron process with a 0.8-micron effective channel length.
+source: 
+Wikipedia contributors. (2024, May 9). AMD Am29000. In Wikipedia, The Free Encyclopedia. 
+Retrieved 22:14, December 18, 2024, from 
+https://en.wikipedia.org/w/index.php?title=AMD_Am29000&oldid=1223052875
+
+The weight of the Am29000 chip is minimal.
+source: idk look at it
+
+Size :	1.1" x 1.1" / 2.8cm x 2.8cm
+Maximum power dissipation : 	2.31 Watt
+source: https://www.cpu-world.com/CPUs/29000/AMD-Am29000-20KC.html
+
 3. Kokio tipo architektūrą turėjo abu kompiuteriai? Ar jie buvo
 akumuliatoriniai, registriniai, stekiniai (dėklo architektūros),
 atmintis-į-atmintį architektūros arba kokios nors kitos architektūros?
