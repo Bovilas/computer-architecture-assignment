@@ -63,6 +63,24 @@ atminties į bankus? Koks buvo (efektyvus) adreso plotis? Koks buvo
 maksimalus įmanomas atminties kiekis kiekvienoje sistemoje? Koks buvo
 tipiškas atminties kiekis, su kuria sistema buvo naudojama?
 
+Address Spaces
+External instructions and data are contained in one of four, 32-bit address-spaces:
+1) InstructionlData Memory.
+2) Input/Output.
+3) Coprocessor.
+4) Instruction Read-Only Memory (Instruction ROM).
+An address in the InstructiOn/Data Memory address-space may be treated as virtual or
+physical, as determined by the Current Processor Status Register. Address translation for
+data accesses is enabled separately from address translation for instruction accesses. A
+program in the Supervisor mode may temporarily disable address translation for individual
+loads and stores; this permits load-real and store-real operations.
+It is possible to partition physical instruction and data addresses into two, separate
+physical address-spaces. However, virtual instruction and data addresses appear in the
+same virtual address-space (i.e instruction/data memory). 
+
+4 giga-byte virtual address space
+source: http://bitsavers.informatik.uni-stuttgart.de/components/amd/Am29000/1987_Am29000_Users_Manual.pdf
+
 9. Ar buvo palaikoma virtualioji atmintis ir kaip? Ar virtuali atmintis
 buvo realizuoti, naudojant puslapiavimą, segmentavimą, abu šiuos
 mechanizmus?
@@ -72,6 +90,44 @@ mašinos komandų turėjo kiekviena architektūra? Kokios buvo instrukcijų
 (komandų) klasės?  Kokius instrukcijų formatus palaikė kiekviena
 architektūra?  Pateikite 8–16 instrukcijų pavyzdžiai. Kokios komandos
 buvo panašios abi architektūros? Kurios komandos skyrėsi?
+
+The Am29000 instruction set contains 115 instructions. These instructions are divided
+into 9 classes:
+1) Integer Arithmetic-perform integer add, subtract, multiply, and divide operations.
+2) Compare-perform arithmetic and logical comparisons. Some instructions in this
+class allow the generation of a trap if the comparison condition is not met.
+3) Logical-perform a set of bit-wise Boolean operations.
+4) Shift-perform arithmetic and logical shifts, and allow the extraction of 32-bit
+words from 64-bit double-words.
+2-5
+5) Data Movement-perform mqvement of data fields between registers, and the
+movement of data to and from external devices and memories.
+6) Constant-allow the generation of large constant values in registers.
+7) Floating-Point-included for floating-point arithmetic, comparisons, and format
+conversions. These instructions are not currently implemented directly in
+processor hardware.
+8) Branch-perform program jumps and subroutine calls.
+9) Miscellaneous-perform miscellaneous control functions and operations not
+provided by other classes. 
+
+JMPT Jump True
+JMPTI Jump True Indirect
+LOAD Load
+LOADL Load and Lock
+LOADM Load Multiple
+LOADSET Load and Set
+MFSR Move from Special Register
+MFTLB Move from Translation Look-Aside Buffer Register
+MTSR Move to Special Register
+MTSRIM Move to Special Register Immediate
+MTTLB Move to Translation Look-Aside Buffer Register
+MUL Multiply Step
+MULL Multiply Last Step
+MULTIPLY Integer Multiply
+MULU Multiply Step, Unsigned
+NAND NAND Logical 
+
+source: http://bitsavers.informatik.uni-stuttgart.de/components/amd/Am29000/1987_Am29000_Users_Manual.pdf
 
 11. Kokius adresavimo būdus palaikė kiekviena architektūra?
 Kurie režimai buvo panašūs, o kurie skyrėsi?
