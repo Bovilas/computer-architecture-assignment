@@ -47,6 +47,19 @@ Generally, the 29000's register usage was considerably more advanced than compet
 
 source: wiki
 
+The Am29000 contains 23 special-purpose registers. These registers provide controls and
+data for certain processor functions.
+Special-purpose registers are accessed by data movement only. Any special-purpose
+register can be written with the contents of any general-purpose register, and any
+general-purpose register can be written with the contents of any special-purpose register.
+Operations cannot be directly performed on the contents of special-purpose registers.
+Some special-purpose registers are protected, and can be accessed only in the Supervisor
+mode. This restriction applies to both read and write accesses. An attempt by a
+User-mode program to access a protected register causes a trap to occur.
+
+src:
+http://bitsavers.informatik.uni-stuttgart.de/components/amd/Am29000/1987_Am29000_Users_Manual.pdf
+
 6. Ar požymių bitai buvo naudojami šiose architektūrose? Kokie
 požymiai buvo naudojami?
 
@@ -132,10 +145,19 @@ source: http://bitsavers.informatik.uni-stuttgart.de/components/amd/Am29000/1987
 11. Kokius adresavimo būdus palaikė kiekviena architektūra?
 Kurie režimai buvo panašūs, o kurie skyrėsi?
 
+register-addressing
+idirect register addressing
+
 12. Kokios buvo kiekvienos architektūros I/O galimybės?
 
 13. Ar buvo palaikomi pertraukimai? Kuo pertraukimų mechanizmai buvo
 panašūs, kuo jie skyrėsi abiejose architektūrose?
+
+Normal program flow may be preempted by an interrupt or trap for which the processor is
+enabled. The effect on the processor is identical for interrupts and traps; the distinction is
+in the different mechanisms by which interrupts and traps are enabled. It is intended that
+interrupts be used for suspending current program execution and causing another program
+to execute, while traps are used to report errors and exceptional conditions.
 
 14. Kokius duomenų tipus palaikė kiekviena architektūra aparatūros
 lygyje? Ar buvo palaikoma fiksuoto kablelio, slankiojo kablelio
@@ -145,14 +167,48 @@ kaip vieneto papildinys (atvirkštinis kodas), dvejeto papildyti
 architektūra (pvz. dešimtainius skaičius, kompleksinius skaičius ir
 kt.)?
 
+Data Types 
+
+A word is defined as 32 bits of data. A half-word consists of 16 bits, and a double-word
+consists of 64 bits. Bytes are 8 bits in length. The Am29000 has direct support for
+word.-integer(signed and unsigned), word-logical, word-Boolean, half-word integer (signed
+and unsigned), and character (byte) data.
+Other data types, such as character strings, are supported with sequences of basic
+instructions and/or external hardware. Single- and double-precision floating-point types
+are defined for the Am29000, but are not directly supported by hardware.
+The format for Boolean data used by the processor is such that the Boolean values TRUE
+and FALSE are represented by 1 and 0, respectively, in the most-significant bit of a word.
+
+
+Most Am29000 instructions deal directly with word-length integer data; integers may be
+either signed or unsigned, depending on the instruction. Some instructions (e.g. AND)
+treat word-length operands as strings of bits. In addition, there is support for character,
+half-word, and Boolean data types. Single-precision and double-precision floating- point
+data types are defined, but not directly supported by processor hardware. 
+
+src: http://bitsavers.informatik.uni-stuttgart.de/components/amd/Am29000/1987_Am29000_Users_Manual.pdf
+
+The 29050 was notable for being early to feature a floating point unit capable of executing one multiply–add operation per cycle.
+src: wiki
+
 15. Kokia buvo kiekvienos sistemos greitaveika? Kokie buvo taktinių
 generatorių dažniai, vidutinis/mažiausias/didžiausias ciklų skaičius,
 reikalingas kiekvienai komandai įvykdyti, vidutinė sistemos
 greitaveika? Kuri sistema buvo našesnė? Koks buv kainos ir našumo
 santykis?
 
+
+25 MHz nominal operating frequency.
+• 17 million instructions per second sustained.
+• 1.5 clock cycles per instruction average. 
+src: http://bitsavers.informatik.uni-stuttgart.de/components/amd/Am29000/1987_Am29000_Users_Manual.pdf
+
 16. Ar architektūros naudojo spartinančią atmintį? Jei taip, kokio
 dydžio?
+
+A Branch Target Cache (512 bytes on the 29000 and 1024 bytes on the 29050) 
+stored sets of 4 or 2 sequential instructions found at the branch target address, reducing the instruction fetch latency during taken branches
+src: wiki
 
 17. Kokios buvo tipinės kiekvienos architektūros taikymo sritys? Kaip
 šios architektūros buvo naudojamos? Trumpai apibūdinkite (vienoje
