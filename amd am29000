@@ -215,6 +215,23 @@ src: wiki
 pastraipoje) vieną konkretų kiekvienos architektūros panaudojimo
 pavyzdį.
 
+The Honeywell 29KII is a CPU based on the AMD 29050, and it was extensively used in real-time avionics.
+
+Positioned as a product for "medium- to high-performance embedded applications" with potential for use in Unix workstations, 
+the 29000 was used in a variety of products such as X terminals, laser printer controller cards, graphics accelerator cards, 
+optical character recognition solutions, and network bridges. 
+The memory architecture of the 29000 was a particular attraction for product designers, allowing them to forego external cache memory and to employ dynamic 
+RAM directly while maintaining acceptable performance,
+permitting a degree of flexibility in the choice of memory technologies used to retain program instructions and data.
+
+One notable product utilising the 29k was Apple's Macintosh Display Card 8·24 GC for its Macintosh IIfx, 
+featuring a 30 MHz Am29000 processor, 64 KB static RAM cache, and 2 MB of video RAM, with the option of an additional 
+2 MB of dynamic RAM for use by the QuickDraw graphical toolkit. 
+The inclusion of the 29k differentiated this particular version of the card from other versions sold by Apple, 
+significantly improving performance when handling 24-bits-per-pixel images.
+
+src: wiki
+
 18. Kiek programinės įrangos buvo parašyta kiekvienai aptariamai
 architektūrai, ar ji (vis dar) prieinama, kur ji buvo naudojama? Kokie
 buvo prieinami kompiliatoriai ir programavimo įrankiai (derintojai,
