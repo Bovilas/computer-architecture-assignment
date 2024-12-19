@@ -1,0 +1,70 @@
+HARRIS RTX 2000
+
+
+
+2. What was the elementary base of a computer/processor (relays,
+vacuum tubes (aka thermoionic valves), transistors, magnetic cores,
+integrated circuits (ICs) – were they hybrid, low scale integration,
+Large Scale Integration (LSI), Very Large Scale Integration (VLSI),
+modern microprocessors)? What where the physical characteristics of
+the equipment (weight, size, power consumption)?
+
+3. What type of architecture did both computers have? Were they
+accumulator based, register based, stack based, memory-to-memory or
+some other architectures?
+
+4. Were they zero-address, one-address, two-address, three-address or
+four address machines?
+
+5. What were the registers in both architectures? Did they have
+registers at all? Were they general purpose registers or specialised
+ones? How many registers did each architecture have? What were the
+widths of these registers?
+
+6. Were the flags used in the architectures? What flags were there?
+
+7. What was the data width (machine word) of each architecture?
+
+8. What was the memory layout of each system? Was address space
+continuous, or was it segmented, paged, subdivided into banks? What was
+the (effective) width of the address? What was the maximum possible
+amount of memory in each system? What was the typical amount of memory
+with which the system was used?
+
+9. Was virtual memory supported, and how? Was it paged or segmented?
+
+10. What was the ISA of each architecture? How many instructions did
+each architecture have? What were the classes of the instructions?
+What instructions formats did each architecture support? Provide
+examples of some 8-16 instructions. What instructions were similar in
+both architectures? Which instructions were different?
+
+11. What were the addressing modes supported by each architecture?
+Which modes were similar, and which were different?
+
+12. What were the I/O capabilities of each architecture?
+
+13. Were interrupts supported for each architecture? How was the
+interrupt support similar, and how was it different in both
+architectures?
+
+14. What data types did each architecture support on instruction
+level? Was fixed point or floating point supported by hardware and
+how? Where integers sign-magnitude, one's complement, two's
+complement? What other "exotic" data types did architecture support
+(decimal numbers, complex numbers, etc.)?
+
+15. What was the speed of each system? How did clock frequencies, clock
+cycles per instruction, instruction rates compare? Which system was
+faster?
+
+16. Did the architectures use cache memory? If yes, how much?
+
+17. What were the typical application areas of each architecture? How
+were they used? Describe briefly (on paragraph) one particular
+installation of each architecture.
+
+18. How much software was written for each discussed architecture, is
+it (still) available, what application domains did it target? What
+compilers and programming tools (debuggers, profilers, assemblers) did
+architectures have? What software libraries were available?
