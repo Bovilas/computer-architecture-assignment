@@ -9,21 +9,58 @@ Large Scale Integration (LSI), Very Large Scale Integration (VLSI),
 modern microprocessors)? What where the physical characteristics of
 the equipment (weight, size, power consumption)?
 
+The RTX2010, manufactured by Intersil, is a radiation hardened stack machine microprocessor which has been used in numerous spacecraft, making it VLSI.
+src: https://en.wikipedia.org/wiki/RTX2010
+
+DIE DIMENSIONS:
+364 mils x 371 mils x 21 mils ±1mil
+src: https://web.archive.org/web/20120603180736/http://www.intersil.com/content/dam/Intersil/documents/fn39/fn3961.pdf
+Maximum Package Power Dissipation : 2 Watts
+src: https://users.ece.cmu.edu/~koopman/forth/Harris90_RTX2000_DataSheet.pdf
+
 3. What type of architecture did both computers have? Were they
 accumulator based, register based, stack based, memory-to-memory or
 some other architectures?
 
+It is a two-stack machine, each stack 256 words deep, that supports direct execution of Forth.
+src: wiki
+
 4. Were they zero-address, one-address, two-address, three-address or
 four address machines?
+
+stack machine, therefore, zero-address
 
 5. What were the registers in both architectures? Did they have
 registers at all? Were they general purpose registers or specialised
 ones? How many registers did each architecture have? What were the
 widths of these registers?
 
+This processor contains eight 16-bit internal registers, which may be accessed
+implicitly or explicitly, depending upon the register accessed
+and the function being performed.
+there are:
+RTX Internal Registers
+Timer/Counter Registers
+Multiplier-Accumulator (MAC) Registers
+On-Chip Peripheral Registers
+Interrupt Controller Registers
+Stack Controller Registers
+Memory Page Controller Registers
+src: https://web.archive.org/web/20120603180736/http://www.intersil.com/content/dam/Intersil/documents/fn39/fn3961.pdf
+
 6. Were the flags used in the architectures? What flags were there?
 
+FATAL STACK ERROR FLAG
+PARAMETER STACK UNDERFLOW FLAG
+PARAMETER STACK OVERFLOW FLAG
+RETURN STACK UNDERFLOW FLAG
+RETURN STACK OVERFLOW FLAG
+src: https://web.archive.org/web/20120603180736/http://www.intersil.com/content/dam/Intersil/documents/fn39/fn3961.pdf
+
 7. What was the data width (machine word) of each architecture?
+
+16 bit wide words
+src: https://web.archive.org/web/20120603180736/http://www.intersil.com/content/dam/Intersil/documents/fn39/fn3961.pdf
 
 8. What was the memory layout of each system? Was address space
 continuous, or was it segmented, paged, subdivided into banks? What was
@@ -31,7 +68,17 @@ the (effective) width of the address? What was the maximum possible
 amount of memory in each system? What was the typical amount of memory
 with which the system was used?
 
+Each 256-word stack may be subdivided into up to eight 32
+word substacks, four 64 word substacks, or two 128 word
+substacks
+
 9. Was virtual memory supported, and how? Was it paged or segmented?
+
+Each stack has a Stack Start Flag (PSF and RSF) which
+may be used for implementing virtual stacks.
+Manipulating the Stack Start Flag provides a
+mechanism for creating a virtual stack in memory which is
+maintained by interrupt driven handlers.
 
 10. What was the ISA of each architecture? How many instructions did
 each architecture have? What were the classes of the instructions?
@@ -39,14 +86,76 @@ What instructions formats did each architecture support? Provide
 examples of some 8-16 instructions. What instructions were similar in
 both architectures? Which instructions were different?
 
+The instruction set for the HS-RTX2010RH TForth compiler
+combines multiple high level instructions into single machine
+instructions without having to rely on either pipelines or
+caches. This optimization yields an effective throughput
+which is faster than the processor’s clock speed, while
+avoiding the unpredictable execution behavior exhibited by
+most RISC processors caused by pipeline flushes and cache
+misses.
+
+src:https://web.archive.org/web/20120603180736/http://www.intersil.com/content/dam/Intersil/documents/fn39/fn3961.pdf
+
+inv shift                DUP @ SWAP                    
+
+lit inv                  DUP nn G! inv
+
+lit SWAP inv             DUP U! inv
+
+lit SWAP op              DUP U@ op
+
+nn inv (short literal)   nn G! inv
+
+nn OVER op               nn G@ inv
+
+nn SWAP op               nn G@ DROP inv
+
+op shift                 nn G@ OVER op
+
+src:https://users.ece.cmu.edu/~koopman/stack_computers/sec4_5.html
+
+
+
 11. What were the addressing modes supported by each architecture?
 Which modes were similar, and which were different?
 
+Bit 12 of the Memory Access Opcode, is used
+to determine whether byte or word operations are to be
+performed (where bit 12 = 0 signifies a word operation, and
+bit 12 = 1 signifies a byte operation). In addition, the
+determination of whether a byte swap is to occur depends on
+whether Addressing Mode 0 or Mode 1 is in effect (as
+determined by bit 2 of the cr and on whether an even
+or odd address is being accessed 
+
+src: https://web.archive.org/web/20120603180736/http://www.intersil.com/content/dam/Intersil/documents/fn39/fn3961.pdf
+
 12. What were the I/O capabilities of each architecture?
+The high performance ASIC Bus, which is
+unique to the RTX product, provides for extension of the
+microcontroller architecture using off-chip hardware and
+application specific I/O devices.
+src:https://web.archive.org/web/20120603180736/http://www.intersil.com/content/dam/Intersil/documents/fn39/fn3961.pdf
 
 13. Were interrupts supported for each architecture? How was the
 interrupt support similar, and how was it different in both
 architectures?
+
+it had an On-Chip Interrupt Controller
+
+ Events in an interrupt sequence are as follows:
+e1. The Interrupt Controller samples the interrupt request inputs on the rising edge of PCLK. If NMI rises between e1 and the rising edge of
+PCLK prior to e5, the interrupt vector will be for NMI.
+e2. If any interrupt requests were sampled, the Interrupt Controller issues an interrupt request to the core on the falling edge of PCLK.
+e3. The core samples the state of the interrupt requests from the Interrupt Controller on the falling edge of PCLK. If INTSUP is high, maskable
+interrupts will not be detected at this time.
+e4. When the core samples an interrupt request on the falling edge of PCLK, an Interrupt Acknowledge cycle will begin on the next rising edge
+of PCLK.
+e5. Following the detection of an interrupt request by the core, an Interrupt Acknowledge cycle begins. The interrupt vector will be based on the
+highest priority interrupt request active at this time.
+12. t44 is only required to determine when the Interrupt Acknowledge cycle will occur.
+13. Interrupt requests should be held active until the Interrupt Acknowledge cycle for that interrupt occurs
 
 14. What data types did each architecture support on instruction
 level? Was fixed point or floating point supported by hardware and
@@ -54,9 +163,23 @@ how? Where integers sign-magnitude, one's complement, two's
 complement? What other "exotic" data types did architecture support
 (decimal numbers, complex numbers, etc.)?
 
+Single Cycle 16-Bit Multiply
+- Single Cycle 16-Bit Multiply Accumulate
+- Single Cycle 32-Bit Barrel Shift
+- Hardware Floating Point Support
+
 15. What was the speed of each system? How did clock frequencies, clock
 cycles per instruction, instruction rates compare? Which system was
 faster?
+
+Max. CPU clock rate	8 MHz
+src: wiki
+
+Step Arithmetic instructions which are performed through the
+ALU are divide and square root. Execution of each step of the
+arithmetic operation takes one cycle, a 32/16-bit Step Divide
+takes 21 cycles, and a 32/16-bit Step Square Root takes 25
+cycles
 
 16. Did the architectures use cache memory? If yes, how much?
 
@@ -64,7 +187,17 @@ faster?
 were they used? Describe briefly (on paragraph) one particular
 installation of each architecture.
 
+Example spacecraft that use the RTX2010
+Advanced Composition Explorer (ACE)
+NEAR/Shoemaker
+TIMED
+Rosetta's lander - Philae
+
 18. How much software was written for each discussed architecture, is
 it (still) available, what application domains did it target? What
 compilers and programming tools (debuggers, profilers, assemblers) did
 architectures have? What software libraries were available?
+
+• C Software Development Environment
+• Direct Execution of Fourth Language
+
